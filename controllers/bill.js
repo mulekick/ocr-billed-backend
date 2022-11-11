@@ -1,6 +1,20 @@
 const { Bill } = require('../models');
 
-const getFileURL = (filePath) => `http://localhost:5678/${filePath}`;
+// !!! fix image resources serving !!!
+/* eslint-disable operator-linebreak, arrow-parens, max-len, array-bracket-spacing, quotes, indent, no-confusing-arrow */
+const getFileURL = f => [
+    `null`,
+    `public/4b392f446047ced066990b0627cfa444`,
+    `public/976fbc50929ab2852a517ff682c603f5`,
+    `public/f8021afdeed2f9305e7120ae3af43383`,
+    `public/85026075b4d16cccb1a23011251f5c81` ].includes(f) ?
+        // - some images are missing from the bills that are initially in the database, so a default image is served
+        `https://media.tenor.com/Ta_hcuLCfCAAAAAC/%E4%BD%95%E3%82%82%E3%81%AA%E3%81%84-%E3%83%8A%E3%83%83%E3%82%B7%E3%83%B3%E3%82%B0.gif` :
+        // - I run the backend on a virtual machine (192.168.1.12) and not on localhost
+        `http://localhost:5678/${f}`.replace(`localhost`, `192.168.1.12`);
+
+// const getFileURL = (filePath) => `http://localhost:5678/${filePath}`;
+// !!! fix image resources serving !!!
 
 const isPicture = (mimeType) => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'].includes(mimeType);
 
